@@ -1,4 +1,4 @@
-# Moneyd GUI
+# Moneyd GUI (read-only)
 > A GUI for Moneyd
 
 - [Usage](#usage)
