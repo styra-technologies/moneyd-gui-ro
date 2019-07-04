@@ -29,14 +29,6 @@ class IndexController {
       ctx.body = { address }
     })
 
-    router.get('/api/modify_balance', async (ctx) => {
-      const accountData = await this.admin.query('accounts')
-      const locals = {
-        accounts: Object.keys(accountData.accounts)
-      }
-      await ctx.render('modify_balance', locals)
-    })
-
     router.get('/api/plugin_admin/:account', async (ctx) => {
       const account = ctx.params.account
       const locals = await this.admin.query('accounts/' + account)
@@ -67,7 +59,7 @@ class IndexController {
       const locals = {
         accounts: Object.keys(accountData.accounts)
       }
-      await ctx.render('plugin_admin', locals)
+      await ctx.render('plugin_admin', {accounts: ['xrpClients']})
     })
 
     router.get('/api/:command', async ctx => {
@@ -78,18 +70,6 @@ class IndexController {
       }
 
       await ctx.render(ctx.params.command, locals)
-    })
-
-    router.post('/api/balance', async (ctx) => {
-      const res = await this.admin.modifyBalance(ctx.request.body)
-      ctx.status = res.status
-      if (!res.ok) ctx.body = await res.text()
-    })
-
-    router.delete('/api/alerts/:id', async (ctx) => {
-      const res = await this.admin.deleteAlert(ctx.params.id)
-      console.log("DELETE!!!", ctx.params.id, res.status)
-      ctx.status = res.status
     })
 
     staticJS.forEach((file) => {

@@ -27,8 +27,6 @@ h5.text-muted Overview
         td
         td Available
         td= info.xrpBalance.available
-h5.text-muted Settlement Amount
-input.form-control#settle-amount(type='text', value='0.020000', pattern='[0-9]*\.?[0-9]+')
 hr/
 h5.text-muted Clients
 .table-responsive
@@ -41,9 +39,7 @@ h5.text-muted Clients
         th(title='Channel balance') Balance
         th(title='Channel from server to client') Client Channel
         th(title='Client channel balance') Balance
-        th
         th State
-        th
     tbody
       each client in info.clients
         tr
@@ -53,8 +49,4 @@ h5.text-muted Clients
           td= client.channelBalance
           td(title=client.clientChannel)= client.clientChannel.substring(0, 6)
           td= client.clientChannelBalance
-          td
-            button.btn.btn-secondary(id='settle:' + client.account) Settle
           td= client.state
-          td
-            button.btn.btn-danger(id='block:' + client.block) Block
